@@ -32,5 +32,5 @@ Sistema de delivery desenvolvido com Spring Boot e Java 21.
 - Profile: development
 
 ## 👨‍💻 Desenvolvedor
-[Seu Nome] - [Sua Turma]
+Telma Carolina Mendes - TI58(B) 02728 - Arquitetura de Sistemas
 Desenvolvido com JDK 21 e Spring Boot 3.2.x
