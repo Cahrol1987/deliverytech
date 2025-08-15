@@ -28,5 +28,5 @@ public class Client {
     private String address;
     private boolean active;
     @OneToMany(mappedBy = "client")
-    private List<Order> orders;
+    private List<Orders> orders;
 }

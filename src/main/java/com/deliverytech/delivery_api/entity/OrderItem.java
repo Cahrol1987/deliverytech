@@ -27,8 +27,8 @@ public class OrderItem {
     private BigDecimal unityPrice;
     private BigDecimal subTotal;
     @ManyToOne
-    @JoinColumn(name = "order_id")
-    private Order order;
+    @JoinColumn(name = "orders_id")
+    private Orders orders;
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;

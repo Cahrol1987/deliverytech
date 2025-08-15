@@ -21,11 +21,11 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Data
-@Table(name = "order")
+@Table(name = "orders")
 @NoArgsConstructor
 @AllArgsConstructor
 
-public class Order {
+public class Orders {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -38,7 +38,7 @@ public class Order {
     @ManyToOne
     @JoinColumn (name = "restaurant_id")
     private Restaurant restaurant;
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "orders", cascade = CascadeType.ALL)
     private List<OrderItem> items;
     @ManyToOne
     @JoinColumn(name = "client_id")

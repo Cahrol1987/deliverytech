@@ -13,8 +13,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity
 @Data
+@Entity
 @Table(name = "product")
 @NoArgsConstructor
 @AllArgsConstructor
@@ -27,7 +27,7 @@ public class Product {
     private BigDecimal price;
     private String category;
     private String description;
-    private boolean available;
+    private Boolean isAvailable;
     @ManyToOne
     @JoinColumn(name = "restaurant_id") //nome da coluna da entidade restaurante que vai se relacionar com essa entidade
     private Restaurant restaurant; //Relacionamento com a entidade restaurante
