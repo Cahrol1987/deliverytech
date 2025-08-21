@@ -10,5 +10,5 @@ public interface ProductService {
     public ProductDto buscarProdutoPorId(Long id);
     public ProductDto atualizarProduto(Long id, ProductDto productDto);
     public ProductDto alterarDisponibilidade(Long id, Boolean isAvalible);
-    public ProductDto buscarProdutosPorCategoria(String categoria);
+    public List <ProductDto> findProductByCategory(String category);
 }

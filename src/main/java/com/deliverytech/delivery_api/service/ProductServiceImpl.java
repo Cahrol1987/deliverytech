@@ -1,6 +1,7 @@
 package com.deliverytech.delivery_api.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -55,15 +56,16 @@ public class ProductServiceImpl implements  ProductService{
     }
 
     @Override
-    public ProductDto buscarProdutosPorCategoria(String categoria) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'buscarProdutosPorCategoria'");
+    public List <ProductDto> findProductByCategory(String category) {
+        ModelMapper modelMapper = new ModelMapper();        
+        return repository.findByCategory(category).stream().map(product -> modelMapper.map(product, ProductDto.class)).collect(Collectors.toList());
     }
 
     @Override
     public ProductDto alterarDisponibilidade(Long id, Boolean isAvalible) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'alterarDisponibilidade'");
+
     }
 
 
