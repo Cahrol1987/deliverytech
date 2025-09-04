@@ -8,6 +8,6 @@ public class ClientDto {
     private String email;
     private String phoneNumber;
     private String address;
-    private boolean active;
+    private Boolean active;
 
 }

@@ -7,7 +7,7 @@ import com.deliverytech.delivery_api.entity.Product;
 
 public interface IProductRepositoryCustom {
 // Produtos por restaurante
-    List<Product> findByRestauranteId(Long restaurantId);
+    List<Product> findByRestauranteId(Long id);
 
     // Apenas produtos disponíveis
     List<Product> findByisAvailableTrue();

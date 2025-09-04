@@ -2,12 +2,10 @@ package com.deliverytech.delivery_api.repository;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Locale.Category;
 
 import org.springframework.stereotype.Repository;
 
 import com.deliverytech.delivery_api.entity.Product;
-
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
@@ -18,17 +16,10 @@ import jakarta.persistence.TypedQuery;
     private EntityManager entityManager; //como eu acesso a base dedos
 
     @Override
-    public List<Product> findByRestauranteId(Long restaurant) {
-        // TODO Auto-generated method stub
-        //throw new UnsupportedOperationException("Unimplemented method 'findByRestauranteId'");
-        return null;
-    }
-
-    @Override
     public List<Product> findByisAvailableTrue() {
-        // TODO Auto-generated method stub
-        //throw new UnsupportedOperationException("Unimplemented method 'findByisAvailableTrue'");
-        return null;
+        String formattedString = String.format("SELECT p FROM Product p WHERE p.isAvailable = true");
+        TypedQuery<Product> query = entityManager.createQuery(formattedString, Product.class);     
+        return query.getResultList();
     }
 
     @Override
@@ -44,15 +35,12 @@ import jakarta.persistence.TypedQuery;
         //throw new UnsupportedOperationException("Unimplemented method 'findByPriceLessThanEqual'");
         return null;
     }
-// // Produtos por restaurante
-//     List<Product> findByRestauranteId(Long restaurantId);
 
-//     // Apenas produtos disponíveis
-//     List<Product> findByisAvailableTrue();
-
-//     // Produtos por categoria
-//     List<Product> findByCategory(String category);
-
-//     // Por faixa de preço (menor ou igual)
-//     List<Product> findByPriceLessThanEqual(BigDecimal price);
+    @Override
+    public List<Product> findByRestauranteId(Long id) {
+        String jpql = "SELECT p FROM Product p WHERE p.restaurant.id = :id";
+        TypedQuery<Product> query = entityManager.createQuery(jpql, Product.class);
+        query.setParameter("id", id);  
+        return query.getResultList();
+    }
 }

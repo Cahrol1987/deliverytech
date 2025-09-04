@@ -2,6 +2,7 @@ package com.deliverytech.delivery_api.entity;
 
 import java.util.List;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -26,7 +27,8 @@ public class Client {
     private String email;
     private String phoneNumber;
     private String address;
-    private boolean active;
+    @Column(columnDefinition = "TINYINT(1)")
+    private Boolean active;
     @OneToMany(mappedBy = "client")
     private List<Orders> orders;
 }

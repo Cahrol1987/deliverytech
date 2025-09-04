@@ -12,13 +12,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.deliverytech.delivery_api.dto.ProductDto;
+import com.deliverytech.delivery_api.dto.RestaurantDto;
+import com.deliverytech.delivery_api.entity.Product;
 import com.deliverytech.delivery_api.service.ProductService;
 import org.springframework.web.bind.annotation.RequestBody;
 
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("/api/v1/product")
+@RequestMapping("/api/v1/Product")
 public class ProductController {
     @Autowired
     private ProductService productService;
@@ -37,7 +39,7 @@ public class ProductController {
     }
 
 
-    @PatchMapping("/{id}/product")
+    @PatchMapping("/{id}/Product")
     public ResponseEntity<ProductDto> atualizarProduto(@RequestBody ProductDto productDto, Long id) {
         ProductDto produtoSalvo = productService.atualizarProduto(id, productDto);
         return ResponseEntity.ok(produtoSalvo);
@@ -49,6 +51,17 @@ public class ProductController {
        List <ProductDto> productDto = productService.findProductByCategory(category);
         return ResponseEntity.ok(productDto);
     }
+   
+    @GetMapping("/Active")
+        public ResponseEntity<List<ProductDto>> findByisAvailableTrue() {
+        List<ProductDto> productDto = productService.findByisAvailableTrue();
+        return ResponseEntity.ok(productDto);
+    }
 
+    @GetMapping("/ByRestaurantId")
+        public ResponseEntity<List<ProductDto>> findByRestauranteId (@RequestParam("query") Long id) {
+        List <ProductDto> productDto = productService.findByRestauranteId(id);
+        return ResponseEntity.ok(productDto);
+    }
 }
 

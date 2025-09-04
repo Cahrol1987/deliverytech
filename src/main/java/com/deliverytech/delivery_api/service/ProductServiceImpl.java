@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.deliverytech.delivery_api.dto.ProductDto;
 import com.deliverytech.delivery_api.entity.Product;
+import com.deliverytech.delivery_api.entity.Restaurant;
 import com.deliverytech.delivery_api.repository.IProductRepository;
+import com.deliverytech.delivery_api.repository.IRestaurantRepository;
 
 import jakarta.persistence.EntityNotFoundException;
 
@@ -19,6 +21,9 @@ public class ProductServiceImpl implements  ProductService{
     @Autowired //Indica que vai utilizar a ingestão de dependência
     private IProductRepository repository; //atributo que referencia a interface criada
 
+     @Autowired
+    private IRestaurantRepository restaurantRepository;
+
     public ProductServiceImpl(IProductRepository repository) {
         this.repository = repository;
     }
@@ -27,6 +32,12 @@ public class ProductServiceImpl implements  ProductService{
     public Long cadastrarProduto(ProductDto productDto) {
         ModelMapper modelMapper = new ModelMapper();
         Product product = modelMapper.map(productDto, Product.class);
+
+        if (productDto.getRestaurant_id() != null) {
+            Restaurant restaurant = restaurantRepository.findById(productDto.getRestaurant_id()).orElseThrow(() -> new RuntimeException("Restaurante não encontrado"));
+            product.setRestaurant(restaurant);
+        }
+
         Product productSaved = repository.save(product);
         return productSaved.getId();
     }
@@ -52,7 +63,18 @@ public class ProductServiceImpl implements  ProductService{
         product.setDescription(productDto.getDescription());
         product.setIsAvailable(productDto.getIsAvailable());
         repository.save(product);
-        return productDto;
+
+        if (productDto.getRestaurant_id() != null) {
+            Restaurant restaurant = restaurantRepository.findById(productDto.getRestaurant_id()).orElseThrow(() -> new RuntimeException("Restaurante não encontrado"));
+            product.setRestaurant(restaurant);
+        }
+
+        Product updatedProduct = repository.save(product);
+
+        // Converte de volta para DTO
+        ModelMapper modelMapper = new ModelMapper();
+        return modelMapper.map(updatedProduct, ProductDto.class);
+
     }
 
     @Override
@@ -66,6 +88,18 @@ public class ProductServiceImpl implements  ProductService{
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'alterarDisponibilidade'");
 
+    }
+
+    @Override
+    public List<ProductDto> findByisAvailableTrue() {
+        ModelMapper modelMapper = new ModelMapper();        
+        return repository.findByisAvailableTrue().stream().map(product -> modelMapper.map(product, ProductDto.class)).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ProductDto> findByRestauranteId(Long id) {
+        ModelMapper modelMapper = new ModelMapper();        
+        return repository.findByRestauranteId(id).stream().map(product -> modelMapper.map(product, ProductDto.class)).collect(Collectors.toList());
     }
 
 
