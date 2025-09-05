@@ -6,7 +6,7 @@ import java.util.List;
 import com.deliverytech.delivery_api.entity.Product;
 
 public interface IProductRepositoryCustom {
-// Produtos por restaurante
+    // Produtos por restaurante
     List<Product> findByRestauranteId(Long id);
 
     // Apenas produtos disponíveis

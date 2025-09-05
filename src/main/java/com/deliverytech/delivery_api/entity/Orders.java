@@ -30,7 +30,7 @@ public class Orders {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private LocalDateTime orderDate;
-    private String addressDelivey;
+    private String addressDelivery;
     private BigDecimal subTotal;
     private BigDecimal deliveryTax;
     private BigDecimal totalValue;

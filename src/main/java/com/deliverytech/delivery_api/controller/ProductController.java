@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.deliverytech.delivery_api.dto.ProductDto;
-import com.deliverytech.delivery_api.dto.RestaurantDto;
-import com.deliverytech.delivery_api.entity.Product;
 import com.deliverytech.delivery_api.service.ProductService;
 import org.springframework.web.bind.annotation.RequestBody;
 

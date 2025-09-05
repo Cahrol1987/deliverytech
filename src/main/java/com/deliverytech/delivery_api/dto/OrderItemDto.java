@@ -8,4 +8,6 @@ public class OrderItemDto {
     private int quantity;
     private BigDecimal unityPrice;
     private BigDecimal subTotal;
+    private Long product_id;
+
 }
